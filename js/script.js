@@ -12,15 +12,17 @@ const CONDICOES_VENCEDOR = [
 ]; // As condições para que haja um vencedor
 
 let fimDeJogo = false; // boleano que serve para ver se o jogo terminou ou não
-let comecoJogo = false;
+let comecoJogo = false; // boleano que serve para ver se o jogo começou
 let player;
 let boot;
 
 function ComecarJogo(jogador){
-    const bttX = document.getElementById('bttJogarX');
-    const bttO = document.getElementById('bttJogarO');
+    const bttX = document.getElementById('bttJogarX'); // constante com do btt "jogar como X"
+    const bttO = document.getElementById('bttJogarO'); // constante com do btt "jogar como O"
 
-    if(jogador === "X"){
+    // verifica qual sinal o jogador escolheu para jogar
+
+    if(jogador === "X"){ 
         player = "X";
         boot = "O";
         comecoJogo = true;
@@ -34,13 +36,14 @@ function ComecarJogo(jogador){
         bttO.style.visibility = "hidden";    
     }else{
         alert("erro");
+        Reiniciar();
     }
 }
 
 // let checarTurno = true; // se for true é o JOGADOR_X, e o contraio o JOGADOR_O
 
 document.addEventListener("click", (Event) => { // chamada quando acontece um click
-    if(Event.target.matches(".celula") && comecoJogo === true){  // verifica se o clique é em uma opçao quadro do jogo
+    if(Event.target.matches(".celula") && comecoJogo === true && fimDeJogo === false){  // verifica se o clique é em uma opçao quadro do jogo
         let id = Event.target.id; // armazena o id do quadro clicado
         if(!isNaN(id)){ // verifica se é um numero
             if(!celulas[id].classList.contains("X") && !celulas[id].classList.contains("O")){ // verifica se essa opçao já foi jogada
